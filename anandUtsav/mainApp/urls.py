@@ -5,11 +5,9 @@ from .views import *
 
 urlpatterns = [
     path('', home, name='home'),
-    path('upload-images/<int:userid>/', uploadImage, name='upload-images'),
-    path('success', success, name='success'),
-    path('display-images', displayImages, name='display-images'),
+    path('upload-images/<int:userId>/', uploadImage, name='upload-images'),
+    path('images', displayImages, name='display-images'),
     path('new-user', createNewUser, name='new-user'),
     path('login', loginUser, name='login'),
     path('logout', logoutUser, name='logout')
-
 ]
