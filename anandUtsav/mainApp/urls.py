@@ -5,7 +5,7 @@ from .views import *
 
 urlpatterns = [
     path('', home, name='home'),
-    path('upload-images', uploadImage, name='upload-images'),
+    path('upload-images/<int:userid>/', uploadImage, name='upload-images'),
     path('success', success, name='success'),
     path('display-images', displayImages, name='display-images'),
     path('new-user', createNewUser, name='new-user'),

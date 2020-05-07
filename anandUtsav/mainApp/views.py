@@ -21,10 +21,13 @@ def loginUser(request):
         if user is not None:
             login(request, user)
             print("logged in")
-            return redirect('/')
+            if(user.is_superuser):
+                return redirect('/new-user')
+            elif(user.is_superuser == False):
+                usr = User.objects.get(id=user.id)
+                return render(request, 'upload-image.html', {'mainuser': request.user, 'user': usr})
         else:
-            print("error")
-            return render(request, 'login.html')
+            return render(request, 'login.html', {'error': "Invalid Username or password"})
     return render(request, 'login.html')
 
 
@@ -49,14 +52,18 @@ def createNewUser(request):
             else:
                 user.is_superuser = False
             user.save()
-            return redirect('/')
+            return redirect('/new-user')
+        else:
+            userquerry = User.objects.all()
+            return render(request, 'new-user.html', {'users': userquerry})
     else:
         return render(request, 'new-user.html', {'premissionError': 'PermissionError'})
     return render(request, 'new-user.html')
 
 
 @login_required(login_url='/login')
-def uploadImage(request):
+def uploadImage(request, userid):
+    usr = User.objects.get(id=userid)
     if(request.user.is_superuser):
         if request.method == 'POST':
             form = UploadFileForm(request.POST, request.FILES)
@@ -64,13 +71,16 @@ def uploadImage(request):
             if form.is_valid():
                 for field in request.FILES.keys():
                     for formfile in request.FILES.getlist(field):
-                        img = Image(file_name=formfile.name, image=formfile)
+                        img = Image(file_name=formfile.name,
+                                    image=formfile, user=usr)
                         img.save()
-                return redirect('success')
+                form = UploadFileForm()
+                return render(request, 'upload-image.html', {'user': usr, 'form': form, 'mainuser': request.user})
         else:
             form = UploadFileForm()
+            return render(request, 'upload-image.html', {'user': usr, 'form': form, 'mainuser': request.user})
     else:
-        return render(request, 'upload-image.html', {'form': form, 'permissionError': 'permissionError'})
+        return render(request, 'upload-image.html', {'user': usr, 'mainuser': request.user})
     return render(request, 'upload-image.html', {'form': form})
 
 
