@@ -1,1 +1,4 @@
 anandUtsav/media/images/*
+django-env
+.vscode
+**/__pycache__
