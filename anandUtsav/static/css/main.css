@@ -1,0 +1,75 @@
+* {
+    box-sizing: border-box;
+    font-size: 20px;
+    padding: 0;
+    margin: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    color: white;
+}
+
+#container-main {
+    padding: 5em 2em 2em;
+    background-color: #fff;
+}
+
+header {
+    background-color: #623cea;
+    height: 4em;
+    width: 100%;
+    position: fixed;
+}
+
+#utsav-media-container {
+    display: flex;
+    overflow: auto;
+    align-items: center;
+}
+
+#utsav-media {
+    display: inline-block;
+
+    padding: 1em;
+    /* box-shadow: 1px 1px 10px rgb(0, 0, 0, 0.3); */
+
+    border-radius: 1em;
+    user-select: none;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1, 1);
+    }
+    50% {
+        transform: scale(1.01, 1.01);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+.utsav-media:active,
+.utsav-media:hover {
+    /* padding: 1em; */
+    /* box-shadow: 1px 1px 30px rgb(0, 0, 0, 0.7); */
+}
+
+.utsav-media:active {
+    animation-duration: 0.1s;
+    animation-name: pop;
+}
+
+.utsav-media + .utsav-media {
+    margin-top: 2em;
+}
+
+.utsav-media-img {
+    user-select: none;
+    /* max-height: 60%; */
+    max-width: 90vh;
+    margin: 1em;
+}

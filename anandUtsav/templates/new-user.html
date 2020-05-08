@@ -1,48 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>Create new user</h1>
-    <p>Please fill in this form to create an account.</p>
-    {{permissionError}}
-    <hr />
-    <form method="post" action="/new-user">
-      {% csrf_token %}
-      <span>{{permissionError}}</span>
-      <div class="container">
+{% extends "base.html" %} {% block content %}
+
+<!-- main content goes here -->
+
+<h1>Create new user</h1>
+<p>Please fill in this form to create an account.</p>
+{{permissionError}}
+<hr />
+<form method="post" action="/new-user">
+    {% csrf_token %}
+    <span>{{permissionError}}</span>
+    <div class="container">
         <label for="username"><b>Username</b></label>
         <input
-          type="text"
-          placeholder="Enter Username"
-          name="username"
-          required
+            type="text"
+            placeholder="Enter Username"
+            name="username"
+            required
         />
 
         <label for="psw"><b>Password</b></label>
         <input
-          type="password"
-          placeholder="Enter Password"
-          name="password"
-          required
+            type="password"
+            placeholder="Enter Password"
+            name="password"
+            required
         />
         <input
-          type="checkbox"
-          id="super-user"
-          name="superuser"
-          value="superuser"
+            type="checkbox"
+            id="super-user"
+            name="superuser"
+            value="superuser"
         />
         <label for="superuser"> Make super user</label><br />
         <hr />
         <button type="submit" class="registerbtn">Register</button>
-      </div>
-    </form>
-    {% for user in users %}
-    <a href="{% url 'upload-images' user.id %}">{{user.username}}</a>
+    </div>
+</form>
+{% for user in users %}
+<a href="{% url 'upload-images' user.id %}">{{user.username}}</a>
 
-    {% endfor %}
-  </body>
-</html>
+{% endfor %} {% endblock %}

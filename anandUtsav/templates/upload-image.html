@@ -1,23 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Upload Image</title>
-    </head>
-    <body>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %} {{ form.as_p }}
-            <button type="submit">Upload</button>
-        </form>
-        {% for i in user.images.all %}
-        <div class="col-md-4">
-            {{ i.name }}
-            <img
-                src="{{ i.image.url }}"
-                class="img-responsive"
-                style="width: 100%; float: left; margin-right: 10px;"
-            />
-        </div>
-        {% endfor %}
-    </body>
-</html>
+{% extends "base.html" %} {% block content %}
+
+<!-- main content goes here -->
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %} {{ form.as_p }}
+    <button type="submit">Upload</button>
+</form>
+{% for i in user.images.all %}
+<div class="col-md-4">
+    {{ i.name }}
+    <img
+        src="{{ i.image.url }}"
+        class="img-responsive"
+        style="width: 100%; float: left; margin-right: 10px;"
+    />
+</div>
+
+{% endfor %} {% endblock %}
