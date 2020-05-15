@@ -4,3 +4,5 @@ from .models import *
 # Register your models here.
 
 admin.site.register(Image)
+admin.site.register(BlogPost)
+admin.site.register(Gallery)
