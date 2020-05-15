@@ -12,7 +12,12 @@
 						<div class="col-md-10 col-md-offset-1">
 							<div class="animate-box">
 								<h2>Services</h2>
-								<p class="breadcrumbs"><span><a href="/">Home</a></span> <span>Services</span></p>
+								<p class="breadcrumbs">
+								{% if user.is_authenticated %}
+								<span><a href="/logout">Logout</a></span> 
+								{% else %}
+								<span><a href="/login">Please Login</a></span> 
+								{% endif %}
 							</div>
 						</div>
 					</div>

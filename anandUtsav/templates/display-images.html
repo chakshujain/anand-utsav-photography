@@ -1,56 +1,66 @@
-	
-	{% extends "base.html" %} 
-	
-	{% block content %}
-	
-	
+{% extends "base.html" %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/display-images.css' %}" />
+{% endblock %} {% block content %}
 
-		<section id="home" class="video-hero" style="height: 800px; background-image: url(images/cover_img_2.jpg);  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
-		<div class="overlay"></div>
-			<div class="display-t text-center">
-				<div class="display-tc">
-					<div class="container">
-						<div class="col-md-10 col-md-offset-1">
-							<div class="animate-box">
-								<h2>Gallery</h2>
-								<p class="breadcrumbs"><span><a href="/">Home</a></span> <span>Gallery</span></p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+<section
+  id="home"
+  class="video-hero"
+  style="height: 800px; background-image: url(images/cover_img_2.jpg);  background-size:cover; background-position: center center;background-attachment:fixed;"
+  data-section="home"
+>
+  <div class="overlay"></div>
+  <div class="display-t text-center">
+    <div class="display-tc">
+      <div class="container">
+        <div class="col-md-10 col-md-offset-1">
+          <div class="animate-box">
+            <h2>Select Your Images</h2>
+            <p class="breadcrumbs">
+              {% if user.is_authenticated %}
+              <span><a href="/logout">Logout</a></span>
+              {% else %}
+              <span><a href="/login">Please Login</a></span>
+              {% endif %}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-		<div class="colorlib-gallery">
-			<div class="container">
-				<div class="row row-pb-md">
-					{% for images in row %}
-					<div class="col-md-3 no-gutters">
-						{% for image in images %}
-								<a href="{{image.image.url}}" class="gallery-img image-popup-link animate-box"><img class="img-responsive" src="{{image.image.url}}" alt="">
-									<div class="desc text-center">
-										<h2>  </h2>
-										<p class="category"><span></span></p>
-									</div>
-								</a>
-						{% endfor %}
-					</div>
-					{% endfor %}
-				</div>
-				<div class="row">
-					<div class="col-md-12 text-center">
-						<ul class="pagination">
-							<li class="disabled"><a href="#">&laquo;</a></li>
-							<li class="active"><a href="#">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">4</a></li>
-							<li><a href="#">&raquo;</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
+<div class="colorlib-gallery">
+  <div class="container">
+    <div class="row row-pb-md">
+      {% for images in row %}
+      <div class="col-md-3 no-gutters">
+        {% for image in images %}
+        <a
+          href="{{image.image.url}}"
+          class="gallery-img selected image-popup-link animate-box"
+          ><img class="img-responsive" src="{{image.image.url}}" alt="" />
+          <div class="desc text-center">
+            <h2></h2>
+            <p class="category"><span></span></p>
+          </div>
+        </a>
+        {% endfor %}
+      </div>
+      {% endfor %}
+    </div>
+    <!-- <div class="row">
+      <div class="col-md-12 text-center">
+        <ul class="pagination">
+          <li class="disabled"><a href="#">&laquo;</a></li>
+          <li class="active"><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li><a href="#">&raquo;</a></li>
+        </ul>
+      </div>
+    </div> -->
+  </div>
+</div>
 
-		
-		{% endblock %}
+{% endblock %}

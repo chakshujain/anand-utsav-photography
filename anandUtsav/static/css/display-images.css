@@ -1,0 +1,5 @@
+.selected {
+  border-radius: 5px;
+  border: 7px solid blue;
+  box-shadow: bisque;
+}

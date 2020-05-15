@@ -11,6 +11,7 @@ def isSuperUser(user):
     return user.is_superuser
 
 def home(request):
+
     return render(request, 'index.html')
 
 def loginUser(request):
@@ -98,11 +99,11 @@ def endUserServices(request):
 
 
 def services(request):
+    
     if request.user.is_superuser:
         return superUserServices(request)
     if request.user.is_authenticated:
         return endUserServices(request)
-
     context = {'servicesClass' : 'active'}
     return render(request, 'services.html', context)
 
