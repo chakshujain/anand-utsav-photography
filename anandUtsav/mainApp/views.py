@@ -1,19 +1,17 @@
 from django.http import HttpResponse, HttpRequest
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .models import Image
 from django.contrib.auth.models import User
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import user_passes_test, login_required
-from .utils import resizeImage
-# Create your views here.
+from .utils import resizeImage, getInGroups
 
 def isSuperUser(user):
     return user.is_superuser
 
 def home(request):
     return render(request, 'index.html')
-
 
 def loginUser(request):
     if request.method == 'POST':
@@ -33,7 +31,6 @@ def logoutUser(request):
     logout(request)
     return redirect('/login')
 
-
 @login_required(login_url='/login')
 @user_passes_test(isSuperUser, login_url="/login")
 def createNewUser(request):
@@ -50,7 +47,6 @@ def createNewUser(request):
         user.save()
     
     return redirect('/services')
-        
 
 
 @login_required(login_url='/login')
@@ -95,16 +91,7 @@ def endUserServices(request):
             finally:
                 image.save() 
 
-    rows = []
-    row = []
-    for i in range(0, len(images)):
-        if (i+1) % 3 == 0:
-            rows.append(row)
-            row = []
-        row.append(images[i])
-    
-    if len(row):
-        rows.append(row)
+    rows = getInGroups(images, 3)
 
          
     return render(request, 'display-images.html', {'row': rows})
@@ -132,12 +119,21 @@ def contact(request):
     context = {'contactClass' : 'active'}
     return render(request, 'contact.html', context)
 
-def blog(request):
-    context = {'blogClass' : 'active'}
+def blog(request, blogId=None):
+    if blogId != None:
+        blog = get_object_or_404(BlogPost, id=blogId)
+        return render(request, 'blog-post.html', {'blog' : blog})
+    blog_posts = BlogPost.objects.all()
+    
+    rows = getInGroups(blog_posts, 3)
+
+    context = {'blogClass' : 'active', 'rows' : rows}
     return render(request, 'blog.html', context)
 
 def gallery(request):
-    context = {'galleryClass' : 'active'}
+    images = Gallery.objects.all()
+    rows = getInGroups(images, 3)
+    context = {'galleryClass' : 'active', 'rows' : rows}
     return render(request, 'gallery.html', context)
 
 

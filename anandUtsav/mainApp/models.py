@@ -19,7 +19,15 @@ class Image(models.Model):
 
 
 class BlogPost(models.Model):
+    image = models.ImageField(upload_to='images/')
     title = models.CharField(max_length=100)
-    publish_date = models.DateField(auto_now=True)
+    published_date = models.DateField(auto_now=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
-    content = models.TextField(max_length=5000)
+    content_des = models.CharField(max_length=500)
+    content_main = models.TextField(max_length=5000)
+            
+
+class Gallery(models.Model):
+    image = models.ImageField(upload_to = 'media/')
+    text = models.TextField(null=True, blank=True)
+    

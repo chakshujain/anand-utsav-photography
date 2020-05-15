@@ -14,5 +14,6 @@ urlpatterns = [
     path('about', about, name='about'),
     path('contact', contact, name='contact'),
     path('gallery', gallery, name='gallery'),
-    path('blog', blog, name='blog')
+    path('blog', blog, name='blog'),
+    path('blog/<int:blogId>/', blog, name='blog-post')
 ]
