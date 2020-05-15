@@ -12,7 +12,7 @@ def isSuperUser(user):
     return user.is_superuser
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'index.html')
 
 
 def loginUser(request):
@@ -23,13 +23,10 @@ def loginUser(request):
         if user is not None:
             login(request, user)
             print("logged in")
-            if(user.is_superuser):
-                return redirect('/new-user')
-            else:
-                usr = User.objects.get(id=user.id)
-                return redirect('/images')
-        return render(request, 'login.html', {'error': "Invalid Username or password"})
-    return render(request, 'login.html')
+            return redirect('/services')
+
+        return render(request, 'services.html', {'error': "Invalid Username or password"})
+    return render(request, 'services.html')
 
 
 def logoutUser(request):
@@ -51,10 +48,9 @@ def createNewUser(request):
         else:
             user.is_superuser = False
         user.save()
-        return redirect('/new-user')
-    else:
-        users = User.objects.all()
-        return render(request, 'new-user.html', {'users': users})
+    
+    return redirect('/services')
+        
 
 
 @login_required(login_url='/login')
@@ -78,12 +74,15 @@ def uploadImage(request, userId):
     if request.method == "GET":
         return render(request, 'upload-image.html', {'user': user, 'form': form})
     
-    
-    
+
+def superUserServices(request):
+    context = {'servicesClass' : 'active'}
+    users = User.objects.all()
+    return render(request, 'new-user.html', {'users': users})
 
 
-@login_required(login_url='/login')
-def displayImages(request):
+def endUserServices(request):
+    context = {'servicesClass' : 'active'}
     images = Image.objects.filter(user=request.user).order_by('id')
     
     if request.method == 'POST':
@@ -95,5 +94,50 @@ def displayImages(request):
                 image.className = ""
             finally:
                 image.save() 
+
+    rows = []
+    row = []
+    for i in range(0, len(images)):
+        if (i+1) % 3 == 0:
+            rows.append(row)
+            row = []
+        row.append(images[i])
     
-    return render(request, 'display-images.html', {'images': images})
+    if len(row):
+        rows.append(row)
+
+         
+    return render(request, 'display-images.html', {'row': rows})
+
+
+def services(request):
+    if request.user.is_superuser:
+        return superUserServices(request)
+    if request.user.is_authenticated:
+        return endUserServices(request)
+
+    context = {'servicesClass' : 'active'}
+    return render(request, 'services.html', context)
+
+
+
+
+
+
+def about(request):
+    context = {'aboutClass' : 'active'}
+    return render(request, 'about.html', context)
+
+def contact(request):
+    context = {'contactClass' : 'active'}
+    return render(request, 'contact.html', context)
+
+def blog(request):
+    context = {'blogClass' : 'active'}
+    return render(request, 'blog.html', context)
+
+def gallery(request):
+    context = {'galleryClass' : 'active'}
+    return render(request, 'gallery.html', context)
+
+

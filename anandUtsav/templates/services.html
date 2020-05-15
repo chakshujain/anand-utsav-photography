@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+	{% block head %}
+		<link rel = "stylesheet" href = "{% static 'css/login-form.css' %}" >
+	{% endblock %}
+
+{%  block content %}
+		<section id="home" class="video-hero" style="height: 800px; background-image: url(images/cover_img_2.jpg);  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
+		<div class="overlay"></div>
+			<div class="display-t text-center">
+				<div class="display-tc">
+					<div class="container">
+						<div class="col-md-10 col-md-offset-1">
+							<div class="animate-box">
+								<h2>Services</h2>
+								<p class="breadcrumbs"><span><a href="/">Home</a></span> <span>Services</span></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class = "container">
+
+			<div class="login-form">
+				<form action="/login" method="post">
+					{% csrf_token %}
+					<img class = "avtar" src="/images/login_icon.png" alt="Avatar">
+					
+					<h2 class="text-center">Member Login</h2>   
+					<div class="form-group">
+						<input type="text" class="form-control" name="username" placeholder="Username" required="required">
+					</div>
+					<div class="form-group">
+						<input type="password" class="form-control" name="password" placeholder="Password" required="required">
+					</div>        
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary btn-lg btn-block">Sign in</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		{% endblock %}

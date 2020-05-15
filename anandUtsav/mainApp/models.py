@@ -16,3 +16,10 @@ class Image(models.Model):
     className = models.CharField(max_length=50, blank=True)
     width = models.CharField(max_length=5, blank=True)
     height = models.CharField(max_length=5, blank=True)
+
+
+class BlogPost(models.Model):
+    title = models.CharField(max_length=100)
+    publish_date = models.DateField(auto_now=True)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
+    content = models.TextField(max_length=5000)

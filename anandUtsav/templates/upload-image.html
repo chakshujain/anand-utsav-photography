@@ -1,6 +1,4 @@
-{% extends "base.html" %} {% block content %}
 
-<!-- main content goes here -->
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %} {{ form.as_p }}
@@ -16,4 +14,76 @@
     />
 </div>
 
-{% endfor %} {% endblock %}
+{% endfor %} 
+
+
+
+
+<!-- 
+  <div class="container upload-section">
+    <form action="">
+      <h3 class="text-center">Upload Images</h3>
+      <div class="well" data-bind="fileDrag: multiFileData">
+        <div class="form-group row">
+          <div class="col-md-6">
+
+            <img
+              style="height: 100px; margin: 5px;"
+              class="img-rounded  thumb"
+              data-bind="attr: { src: dataURL }, visible: dataURL"
+            />
+            
+            <div data-bind="ifnot: fileData().dataURL">
+              <label class="drag-label">Drag files here</label>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <input
+              type="file"
+              multiple
+              data-bind="fileInput: multiFileData, customFileInput: {
+                      buttonClass: 'btn btn-success',
+                      fileNameClass: 'disabled form-control',
+                      onClear: onClear,
+                      onInvalidFileDrop: onInvalidFileDrop
+                    }"
+              accept="image/*"
+            />
+          </div>
+        </div>
+      </div>
+      <input class="btn btn-success" type="submit" value="Upload" />
+    </form>
+  </div>
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/knockout/3.1.0/knockout-min.js"></script>
+  <script src="js/knockout-file-bindings.js"></script>
+  <script>
+    var viewModel = {};
+    viewModel.fileData = ko.observable({
+      dataURL: ko.observable(),
+      // can add "fileTypes" observable here, and it will override the "accept" attribute on the file input
+      // fileTypes: ko.observable('.xlsx,image/png,audio/*')
+    });
+    viewModel.multiFileData = ko.observable({
+      dataURLArray: ko.observableArray(),
+    });
+    viewModel.onClear = function(fileData) {
+      if (confirm("Are you sure?")) {
+        fileData.clear && fileData.clear();
+      }
+    };
+    viewModel.onInvalidFileDrop = function(failedFiles) {
+      var fileNames = [];
+      for (var i = 0; i < failedFiles.length; i++) {
+        fileNames.push(failedFiles[i].name);
+      }
+      var message = "Invalid file type: " + fileNames.join(", ");
+      alert(message);
+      console.error(message);
+    };
+    ko.applyBindings(viewModel);
+  </script> -->
+
+
+
