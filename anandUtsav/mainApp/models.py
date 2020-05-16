@@ -7,6 +7,7 @@ class Image(models.Model):
     def save(self, *args, **kwargs):
         super().save()
         self.width, self.height = resizeImage(self.image.path)
+        self.is_selected = (True if self.className == 'selected' else False)
         super().save()
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
@@ -16,7 +17,7 @@ class Image(models.Model):
     className = models.CharField(max_length=50, blank=True)
     width = models.CharField(max_length=5, blank=True)
     height = models.CharField(max_length=5, blank=True)
-
+    is_selected = models.BooleanField(default=False)
 
 class BlogPost(models.Model):
     image = models.ImageField(upload_to='images/')
