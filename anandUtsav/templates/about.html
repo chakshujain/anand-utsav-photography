@@ -1,11 +1,10 @@
 	
 	{% extends "base.html" %} 
-	
-	{% block content %}
-	
-	
 
-		<section id="home" class="video-hero" style="height: 800px; background-image: url(images/cover_img_2.jpg);  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
+
+	{% block top_section %}
+
+	<section id="home" class="video-hero" style="height: 800px; background-image: url(images/cover_img_2.jpg);  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
 		<div class="overlay"></div>
 			<div class="display-t text-center">
 				<div class="display-tc">
@@ -20,7 +19,9 @@
 				</div>
 			</div>
 		</section>
-
+	{% endblock %}
+	
+	{% block content %}
 		<div id="colorlib-about">
 			<div class="container">
 				<div class="row row-pb-lg">
@@ -29,7 +30,7 @@
 							<a href="https://vimeo.com/channels/staffpicks/93951774" class="popup-vimeo"><i class="icon-play3"></i></a>
 							<div class="overlay"></div>
 						</div>
-					</div>
+					</div> 
 					<div class="col-md-6 animate-box">
 						<h2>About Imahe</h2>
 						<p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
