@@ -32,9 +32,9 @@
       {% for images in row %}
       <div class="col-md-3 no-gutters">
         {% for image in images %}
-        <a
+        <a 
           href="{{image.image.url}}"
-          class="gallery-img selected image-popup-link animate-box"
+          class="gallery-img custom-media animate-box"
           ><img class="img-responsive" src="{{image.image.url}}" alt="" />
           <div class="desc text-center">
             <h2></h2>
@@ -60,4 +60,20 @@
   </div>
 </div>
 
+<script>
+  function toogleClass(ele, className) {
+    if (ele.classList.contains(className)) {
+      ele.classList.remove(className);
+    } else {
+      ele.classList.add(className);
+    }
+  }
+  var media = document.getElementsByClassName('custom-media');
+  for (var i = 0; i < media.length; i++) {
+    media[i].addEventListener('click', function(ev) {
+      ev.preventDefault();
+      toogleClass(this, 'selected');
+    })
+  }
+</script>
 {% endblock %}
