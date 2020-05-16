@@ -1,4 +1,5 @@
 {% extends 'base.html' %} 
+{% load static %}
   {% block head %}
     <link
       rel="stylesheet"
@@ -6,6 +7,8 @@
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
+
+    <link rel="stylesheet" href="{% static 'css/display-images.css' %}">
 
     {% endblock %}
 
@@ -51,7 +54,7 @@
   <div class="row">
     <div class="col-md-8">
       {% for i in user.images.all %} {{ i.name }}
-      <img src="{{ i.image.url }}" class="img-responsive" />
+      <img src="{{ i.image.url }}" class="{{i.className}} img-responsive" />
 
       {% endfor %}
     </div>
