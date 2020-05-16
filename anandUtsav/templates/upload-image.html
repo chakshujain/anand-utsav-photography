@@ -61,18 +61,12 @@
     <div class="col-md-4">
       <h1 style="font-size: 4rem;">Selected File Names</h1>
       <ol>
-        <li style="font-size: 2rem;">dummy file name</li>
-        <li style="font-size: 2rem;">dummy file name</li>
-        <li style="font-size: 2rem;">dummy file name</li>
-        <li style="font-size: 2rem;">dummy file name</li>
-        <li style="font-size: 2rem;">dummy file name</li>
-        <li style="font-size: 2rem;">dummy file name</li>
-        <li style="font-size: 2rem;">dummy file name</li>
-        <li style="font-size: 2rem;">dummy file name</li>
-        <li style="font-size: 2rem;">dummy file name</li>
-        <li style="font-size: 2rem;">dummy file name</li>
-        <li style="font-size: 2rem;">dummy file name</li>
-        <li style="font-size: 2rem;">dummy file name</li>
+        {% for image in user.images.all %}
+          {% if image.is_selected %}
+          <li style="font-size: 2rem;"> {{image.file_name}} </li>
+          {% endif %}
+        {% endfor %}
+        
       </ol>
     </div>
   </div>
