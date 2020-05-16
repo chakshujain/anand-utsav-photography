@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout, authenticate, login
 from django.contrib.auth.decorators import user_passes_test, login_required
 from .utils import resizeImage, getInGroups
+from django.views.decorators.csrf import csrf_exempt
 
 def isSuperUser(user):
     return user.is_superuser
@@ -87,7 +88,8 @@ def endUserServices(request):
     if request.method == 'POST':
         for image in images:
             try:
-                image.className = str(request.GET[str(image.id)]) 
+                image.className = str(request.POST[str(image.id)])
+                print('changing : ', str(request.POST[str(image.id)])) 
             except Exception as e:
                 print("Exception in displayImages", e)
                 image.className = ""
@@ -100,6 +102,7 @@ def endUserServices(request):
     return render(request, 'display-images.html', {'row': rows})
 
 
+@csrf_exempt
 def services(request):
     
     if request.user.is_superuser:

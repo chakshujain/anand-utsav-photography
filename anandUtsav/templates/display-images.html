@@ -34,8 +34,8 @@
         {% for image in images %}
         <!-- image-popup-link -->
         <a 
-          href="{{image.image.url}}"
-          class="gallery-img custom-media animate-box"
+          href="#"
+          class="custom-media gallery-img {{image.className}} animate-box" id="{{image.id}}"
           ><img class="img-responsive" src="{{image.image.url}}" alt="" />
           <div class="desc text-center">
             <h2></h2>
@@ -46,6 +46,9 @@
       </div>
       {% endfor %}
     </div>
+  <div class="btn-container">
+    <button id='au-save-btn' class="btn btn-info">Save</button>
+  </div>
     <!-- <div class="row">
       <div class="col-md-12 text-center">
         <ul class="pagination">
@@ -62,6 +65,27 @@
 </div>
 
 <script>
+  var media = document.getElementsByClassName('custom-media');
+  for (var i = 0; i < media.length; i++) {
+    media[i].addEventListener('click', function(ev) {
+      ev.preventDefault();
+      toogleClass(this, 'selected');
+    });
+  }
+  
+  document.getElementById('au-save-btn').onclick = function(ev) {
+    var media = document.getElementsByClassName('selected');
+    var data = {};
+    for (var i = 0; i < media.length; i++) {
+      data[media[i].id] = 'selected';
+    }
+    $.post('/services', jQuery.param(data))
+      .done(function(){
+        alert('done');
+      }).fail(function() {
+        alert('something went wrong');
+      })
+  }
   function toogleClass(ele, className) {
     if (ele.classList.contains(className)) {
       ele.classList.remove(className);
@@ -69,12 +93,6 @@
       ele.classList.add(className);
     }
   }
-  var media = document.getElementsByClassName('custom-media');
-  for (var i = 0; i < media.length; i++) {
-    media[i].addEventListener('click', function(ev) {
-      ev.preventDefault();
-      toogleClass(this, 'selected');
-    })
-  }
+  
 </script>
 {% endblock %}
