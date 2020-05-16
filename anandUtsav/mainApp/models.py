@@ -24,7 +24,7 @@ class BlogPost(models.Model):
     title = models.CharField(max_length=100)
     published_date = models.DateField(auto_now=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='posts')
-    content_des = models.CharField(max_length=500)
+    content_des = models.CharField(max_length=50)
     content_main = models.TextField(max_length=5000)
             
 
