@@ -11,8 +11,10 @@ def isSuperUser(user):
     return user.is_superuser
 
 def home(request):
-
-    return render(request, 'index.html')
+    latest_blog = BlogPost.objects.all().order_by('published_date')[:3]
+    latest_gallery_row = getInGroups(Gallery.objects.all().order_by('id')[:3], 3)
+    context = {'latest_blogs' : latest_blog, 'latest_gallery_row' : latest_gallery_row}
+    return render(request, 'index.html', context)
 
 def loginUser(request):
     if request.method == 'POST':
