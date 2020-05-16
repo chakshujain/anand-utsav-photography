@@ -1,11 +1,7 @@
 	
 	{% extends "base.html" %} 
 	
-	{% block content %}
-	
-	
-	<section id="home" class="video-hero" style="height: 800px; background-image: url(images/cover_img_1.jpg);  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
-		<div class="overlay"></div>
+	{% block top_section %}
 			<a class="player" data-property="{videoURL:'https://www.youtube.com/watch?v=Yz5-mrDBbxU',containment:'#home', showControls:false, autoPlay:true, loop:true, mute:true, startAt:0, opacity:1, quality:'default'}"></a> 
 			<div class="display-t text-center">
 				<div class="display-tc">
@@ -21,7 +17,9 @@
 					</div>
 				</div>
 			</div>
-		</section>
+	{% endblock %}
+
+	{% block content %}
 
 		<div id="colorlib-services">
 			<div class="container">
@@ -86,62 +84,18 @@
 					</div>
 				</div>
 				<div class="row">
+					{% for gallery_posts in latest_gallery_row %}{% for post in gallery_posts %}
 					<div class="col-md-3 no-gutters">
-						<a href="images/gallery-1.jpg" class="gallery-img image-popup-link animate-box"><img class="img-responsive" src="images/gallery-1.jpg" alt="">
+						
+						<a href="{{post.image.url}}" class="gallery-img image-popup-link animate-box"><img class="img-responsive" src="{{post.image.url}}" alt="">
 							<div class="desc text-center">
-								<h2>Fashion be like</h2>
-								<p class="category"><span>Fashion</span></p>
+								<h2>{{post.text}}</h2>
+								<p class="category"><span>{{post.category}}</span></p>
 							</div>
 						</a>
-						<a href="images/gallery-2.jpg" class="gallery-img image-popup-link animate-box"><img class="img-responsive" src="images/gallery-2.jpg" alt="">
-							<div class="desc text-center">
-								<h2>Fashion be like</h2>
-								<p class="category"><span>Jacket</span> <span>Woman</span></p>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-3 no-gutters">
-						<a href="images/gallery-3.jpg" class="gallery-img image-popup-link animate-box"><img class="img-responsive" src="images/gallery-3.jpg" alt="">
-							<div class="desc text-center">
-								<h2>Fashion be like</h2>
-								<p class="category"><span>Jacket</span> <span>Male</span></p>
-							</div>
-						</a>
-						<a href="images/gallery-4.jpg" class="gallery-img image-popup-link animate-box"><img class="img-responsive" src="images/gallery-4.jpg" alt="">
-							<div class="desc text-center">
-								<h2>Fashion be like</h2>
-								<p class="category"><span>Fashion</span></p>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-3 no-gutters">
-						<a href="images/gallery-5.jpg" class="gallery-img image-popup-link animate-box"><img class="img-responsive" src="images/gallery-5.jpg" alt="">
-							<div class="desc text-center">
-								<h2>Fashion be like</h2>
-								<p class="category"><span>Fashion</span></p>
-							</div>
-						</a>
-						<a href="images/gallery-6.jpg" class="gallery-img image-popup-link animate-box"><img class="img-responsive" src="images/gallery-6.jpg" alt="">
-							<div class="desc text-center">
-								<h2>Fashion be like</h2>
-								<p class="category"><span>Fashion</span></p>
-							</div>
-						</a>
-					</div>
-					<div class="col-md-3 no-gutters">
-						<a href="images/gallery-7.jpg" class="gallery-img image-popup-link animate-box"><img class="img-responsive" src="images/gallery-7.jpg" alt="">
-							<div class="desc text-center">
-								<h2>Fashion be like</h2>
-								<p class="category"><span>Fashion</span></p>
-							</div>
-						</a>
-						<a href="images/gallery-8.jpg" class="gallery-img image-popup-link animate-box"><img class="img-responsive" src="images/gallery-8.jpg" alt="">
-							<div class="desc text-center">
-								<h2>Fashion be like</h2>
-								<p class="category"><span>Fashion</span></p>
-							</div>
-						</a>
-					</div>
+						
+					</div>{% endfor %}
+					{% endfor %}
 				</div>
 			</div>
 		</div>
@@ -154,42 +108,20 @@
 					</div>
 				</div>
 				<div class="row">
+					{% for blog_post in latest_blogs %}
 					<div class="col-md-4 animate-box">
 						<article class="article-entry">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-1.jpg);"></a>
+							<a href="/blog/{{blog_post.id}}" class="blog-img" style="background-image: url({{blog_post.image.url}});"></a>
 							<div class="desc">
-								<h2><a href="blog.html">Photoshoot Technique</a></h2>
-								<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
+								<h2><a href="/blog/{{blog_post.id}}">{{blog_post.title}}</a></h2>
+								<p>{{blog.content_des}}</p>
 							</div>
 							<div class="admin">
-								<p><span><i class="icon-user2"></i> by: Mark Harris</span> <span class="day"><i class="icon-calendar"></i> 30 March 2018</span> <span><a href="#"><i class="icon-bubble3"></i> 10</a></span></p>
+								<p><span><i class="icon-user2"></i> by: {{blog_post.author}}</span> <span class="day"><i class="icon-calendar"></i> {{blog_post.published_date}}</span> <span><a href="#"><i class="icon-bubble3"></i></a></span></p>
 							</div>
 						</article>
 					</div>
-					<div class="col-md-4 animate-box">
-						<article class="article-entry">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-2.jpg);"></a>
-							<div class="desc">
-								<h2><a href="blog.html">Some tricks in Photoshop for your photo</a></h2>
-								<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
-							</div>
-							<div class="admin">
-								<p><span><i class="icon-user2"></i> by: Mark Harris</span> <span class="day"><i class="icon-calendar"></i> 30 March 2018</span> <span><a href="#"><i class="icon-bubble3"></i> 10</a></span></p>
-							</div>
-						</article>
-					</div>
-					<div class="col-md-4 animate-box">
-						<article class="article-entry">
-							<a href="blog.html" class="blog-img" style="background-image: url(images/blog-3.jpg);"></a>
-							<div class="desc">
-								<h2><a href="blog.html">50 Effects in Photoshop</a></h2>
-								<p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life</p>
-							</div>
-							<div class="admin">
-								<p><span><i class="icon-user2"></i> by: Mark Harris</span> <span class="day"><i class="icon-calendar"></i> 30 March 2018</span> <span><a href="#"><i class="icon-bubble3"></i> 10</a></span></p>
-							</div>
-						</article>
-					</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>

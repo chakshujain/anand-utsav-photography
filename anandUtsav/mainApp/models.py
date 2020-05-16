@@ -30,4 +30,5 @@ class BlogPost(models.Model):
 class Gallery(models.Model):
     image = models.ImageField(upload_to = 'media/')
     text = models.TextField(null=True, blank=True)
+    category = models.CharField(null=True, blank=True, max_length=30)
     

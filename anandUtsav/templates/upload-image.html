@@ -1,38 +1,36 @@
-{% extends 'base.html' %} {% block head %}
-<link
-  rel="stylesheet"
-  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-  integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
-  crossorigin="anonymous"
-/>
+{% extends 'base.html' %} 
+  {% block head %}
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
 
-{% endblock %} {% block content %}
-<section
-  id="home"
-  class="video-hero"
-  style="height: 800px; background-image: url(images/cover_img_2.jpg);  background-size:cover; background-position: center center;background-attachment:fixed;"
-  data-section="home"
->
-  <div class="overlay"></div>
-  <div class="display-t text-center">
-    <div class="display-tc">
-      <div class="container">
-        <div class="col-md-10 col-md-offset-1">
-          <div class="animate-box">
-            <h2>Upload Images</h2>
-            <p class="breadcrumbs">
-              {% if user.is_authenticated %}
-              <span><a href="/logout">Logout</a></span>
-              {% else %}
-              <span><a href="/login">Login</a></span>
-              {% endif %}
-            </p>
+    {% endblock %}
+
+    {% block top_section %}
+    <div class="display-t text-center">
+      <div class="display-tc">
+        <div class="container">
+          <div class="col-md-10 col-md-offset-1">
+            <div class="animate-box">
+              <h2>Upload Images</h2>
+              <p class="breadcrumbs">
+                {% if user.is_authenticated %}
+                <span><a href="/logout">Logout</a></span>
+                {% else %}
+                <span><a href="/login">Login</a></span>
+                {% endif %}
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+    {% endblock %}
+
+{% block content %}
 
 <div class="container">
   <form

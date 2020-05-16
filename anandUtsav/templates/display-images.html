@@ -1,14 +1,8 @@
 {% extends "base.html" %} {% load static %} {% block head %}
 <link rel="stylesheet" href="{% static 'css/display-images.css' %}" />
-{% endblock %} {% block content %}
+{% endblock %} 
 
-<section
-  id="home"
-  class="video-hero"
-  style="height: 800px; background-image: url(images/cover_img_2.jpg);  background-size:cover; background-position: center center;background-attachment:fixed;"
-  data-section="home"
->
-  <div class="overlay"></div>
+{% block top_section %}
   <div class="display-t text-center">
     <div class="display-tc">
       <div class="container">
@@ -27,7 +21,10 @@
       </div>
     </div>
   </div>
-</section>
+	{% endblock %}
+
+
+{% block content %}
 
 <div class="colorlib-gallery">
   <div class="container">

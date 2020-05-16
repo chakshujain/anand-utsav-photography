@@ -1,11 +1,7 @@
 	
 	{% extends "base.html" %} 
-	
-	{% block content %}
-	
-	
-		<section id="home" class="video-hero" style="height: 800px; background-image: url(images/cover_img_2.jpg);  background-size:cover; background-position: center center;background-attachment:fixed;" data-section="home">
-		<div class="overlay"></div>
+	{% load static %}	
+	{% block top_section %}
 			<div class="display-t text-center">
 				<div class="display-tc">
 					<div class="container">
@@ -23,13 +19,16 @@
 					</div>
 				</div>
 			</div>
+	{% endblock %}
+
+	{% block content %}
 		</section>
 		<div class = "container">
 
 			<div class="login-form">
 				<form action="/" method="post">
 					
-					<img class = "avtar" src="/images/login_icon.png" alt="Avatar">
+					<img class = "avtar" src="{% static 'images/login_icon.png' %}" alt="Avatar">
 					<h2 class="text-center">Create New User</h2>   
 					<div class="form-group">
 						<input type="text" class="form-control" name="username" placeholder="Username" required="required">
